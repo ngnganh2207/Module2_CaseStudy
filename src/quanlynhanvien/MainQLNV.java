@@ -9,6 +9,9 @@ public class MainQLNV {
     public static void main(String[] args) {
         Scanner scanner= new Scanner(System.in);
         QLNV qlnv= new QLNV();
+        ManagerAcc managerAcc= new ManagerAcc();
+        managerAcc.login();
+
         while (true){
             System.out.println("0. Exit-Đăng Xuất Chương Trình");
             System.out.println("1. Thêm nhân viên-> SAU ĐÓ CHỌN 10 ĐỂ LƯU LẠI NV BẠN THÊM VÀO FILE");
@@ -16,12 +19,12 @@ public class MainQLNV {
             System.out.println("3. Kiểm tra trạng thái nhân viên theo name");
             System.out.println("4. Sửa thông tin nhân viên");
             System.out.println("5. Xóa nhân viên khỏi hệ thống");
-            System.out.println("6. Update lại trạng thái của nhân viên");
+            System.out.println("6. Update lại trạng thái của nhân viên-> sau đó chọn 10 để lưu lại thay đổi vào file");
             System.out.println("7. Tính lương nhân viên theo part time, full time");
             System.out.println("8. Hiện thị danh sách nhân viên theo trạng thái");
             System.out.println("9. Hiển thị toàn bộ thông tin nhân viên->->VUI LÒNG TRỌN 11 TRƯỚC ĐỂ LOAD LIST ĐÃ LƯU TRONG FILE");
             System.out.println("10. Ghi file Text.txt");
-            System.out.println("11. Đọc file Text.txt");
+            System.out.println("11. Đọc file Text.txt->CẦN LỰA CHỌN ĐẦU LOAD DỮ LIỆU");
             int choice=-1;
             try{
                 choice = Integer.parseInt(scanner.nextLine());
@@ -46,7 +49,7 @@ public class MainQLNV {
                             qlnv.add(nhanVien);
                             break;
                         }else {
-                            System.out.println("Lựa chọn không nằm trong list, vui lòng chọn lại!");
+                            System.out.println("Lựa chọn "+ choice1+" không nằm trong list, vui lòng chọn lại!");
                         }
                     }
                     break;

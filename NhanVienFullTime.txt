@@ -1,4 +1,2 @@
 eCode, name, age, gendor, phone, email, salary, status, dayOn, dayOff, overTime
-CGMD111111,Nguyễn Văn A,20,Nam,911111111,nguyenvana@gmail.com,500000.0,true,28,2,40.0
-CGMD333333,Nguyễn Văn C,23,Nam,933333333,nguyenvanc@yahoo.com,600000.0,true,28,1,30.0
-CGMD444444,Nguyễn Văn D,23,Nam,944444444,nguyenvand@hotmail.com,450000.0,true,30,2,40.0
+CGMD111111,Nguyen Van A,19,Nam,911111111,abc@gmail.com,50000.0,true,30,2,30.0

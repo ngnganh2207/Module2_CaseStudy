@@ -153,6 +153,16 @@ public class QLNV {
         while (true){
             System.out.println("Nhập Mã Nhân Viên- Theo Định dạng: CGMD123456");
             String eCode= scanner.nextLine();
+            boolean check= false;
+            for(NhanVien nv: list ){
+                if(nv.geteCode().equals(eCode)){
+                    System.out.println("Mã nhân viên đã tồn tại,vui lòng nhập lại");
+                    check= true;
+                }
+            }
+            if(check){
+                continue;
+            }
             Pattern pattern= Pattern.compile("^CGMD\\d{6}$");
             Matcher matcher= pattern.matcher(eCode);
             if(matcher.matches()){
@@ -206,14 +216,42 @@ public class QLNV {
         for(int i=0;i< list.size();i++){
             if(list.get(i).geteCode().equals(eCode)){
                 if(list.get(i) instanceof NVFullTime){
-                    list.set(i,creat("full"));
-                }else {
-                    list.set(i,creat("part"));
+                    list.set(i,creatEDit(eCode,"full"));
+                    return;
+                }else if (list.get(i) instanceof NVPartTime){
+                    list.set(i,creatEDit(eCode,"part"));
+                    return;
                 }
-            }else {
-                System.out.println("Không tìm thấy mã nhân viên");
             }
-            break;
+        }
+        System.out.println("Không tìm thấy mã nhân viên");
+    }
+
+    public NhanVien creatEDit(String eCodeEdit,String kieuNV){
+        //String eCode, String name, int age, String gendor, int phone, String email, double salary, boolean status
+
+        String eCode= eCodeEdit;
+        String name = getString2();
+        int age = getAge();
+        System.out.println("Nhập giới tính");
+        String gendor= scanner.nextLine();
+        int phone = getPhone();
+        String email = getString1();
+        double salary = getSalary();
+        boolean status = isaBoolean();
+        if(kieuNV.equals(NV_Full_Time)){
+            ////String eCode, String name, int age, String gendor, int phone, String email, double salary, boolean status
+            System.out.println("Nhập số ngày làm việc");
+            int dayOn= Integer.parseInt(scanner.nextLine());
+            System.out.println("Nhập số ngày nghỉ");
+            int dayOff= Integer.parseInt(scanner.nextLine());
+            System.out.println("Nhập số giờ OT");
+            double overTime= Double.parseDouble(scanner.nextLine());
+            return new NVFullTime(eCode,name,age,gendor,phone,email,salary,status,dayOn,dayOff,overTime);
+        }else {
+            System.out.println("Nhập tổng thời gian làm việc theo giờ");
+            double timeWork= Double.parseDouble(scanner.nextLine());
+            return new NVPartTime(eCode,name,age,gendor,phone,email,salary,status,timeWork);
         }
     }
 
@@ -280,6 +318,20 @@ public class QLNV {
 
     public ArrayList<NhanVien> readFile(){
         ArrayList<NhanVien> list= new ArrayList<>();
+        if (!nhanVienFull.exists()){
+            try {
+                nhanVienFull.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(!nhanVienPart.exists()){
+            try {
+                nhanVienPart.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         try {
             FileReader fileReader1= new FileReader(nhanVienFull);
             bufferedReader1= new BufferedReader(fileReader1);

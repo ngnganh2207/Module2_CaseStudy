@@ -11,7 +11,7 @@ public class ManagerAcc {
     List<Account> accList = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
     File account = new File("Account.csv");
-    String tieude = "UserName, PassWord";
+    String tieude = "UserName, PassWord, Role";
     static BufferedWriter bufferedWriter;
     static BufferedReader bufferedReader;
 
@@ -24,7 +24,20 @@ public class ManagerAcc {
         String userName = getString();
 
         String passWord = getString1();
-        return new Account(userName, passWord);
+        String role= getString2();
+        return new Account(userName, passWord,role);
+    }
+
+    private String getString2(){
+        while(true){
+            System.out.println("Nhập role: 'User' hoặc 'Admin'");
+            String role= scanner.nextLine();
+            if(role.equals("User")||role.equals("Admin")){
+                return role;
+            }else {
+                System.out.println("Nhập lại role: chỉ 'User' hoặc 'Admin'");
+            }
+        }
     }
 
     private String getString1() {
@@ -102,7 +115,7 @@ public class ManagerAcc {
             String line = bufferedReader.readLine();
             while ((line = bufferedReader.readLine()) != null) {
                 String[] arr = line.split(",");
-                accList.add(new Account(arr[0], arr[1]));
+                accList.add(new Account(arr[0], arr[1],arr[2]));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -118,7 +131,7 @@ public class ManagerAcc {
         return accList;
     }
 
-    public void login() {
+    public int login() {
         //Không được khoảng trắng và tk trùng nhau
         while (true) {
             int select = -1;
@@ -144,8 +157,10 @@ public class ManagerAcc {
                 String passWord = scanner.nextLine();
                 accList = readFile();
                 for (Account account : accList) {
-                    if (account.getUser().equals(userName) && account.getPassWord().equals(passWord)) {
-                        return;
+                    if (account.getUser().equals(userName) && account.getPassWord().equals(passWord) &&account.getRole().equals("Admin")) {
+                        return 1;
+                    }else if(account.getUser().equals(userName) && account.getPassWord().equals(passWord) &&account.getRole().equals("User")){
+                        return 2;
                     }
                 }
                 System.out.println("Tài khoản không đúng hoặc bạn chưa đăng ký");

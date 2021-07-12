@@ -1,3 +1,5 @@
-UserName, PassWord
-a12345,a12345
-aaaaa,aaaaa
+UserName, PassWord, Role
+aaaaa,1,Admin
+bbbbb,1,User
+ccccc,1,Admin
+ddddd,1,User

@@ -1,2 +1,3 @@
 eCode, name, age, gendor, phone, email, salary, status, timeWork
 CGMD222222,Nguyen Van B,21,Nữ,333333,acb@yahoo.com,40000.0,true,50.0
+CGMD444444,Nguyen Van C,20,Nu,9333,nguyenvanc@gmail.com,50000.0,false,60.0
